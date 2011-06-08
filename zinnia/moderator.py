@@ -118,6 +118,8 @@ class EntryCommentModerator(CommentModerator):
         allowed to show up immediately, or should be marked non-public
         and await approval."""
         if self.auto_moderate_comments:
+            comment.is_public = False
+            comment.save()
             return True
 
         if check_is_spam(comment, content_object, request,
