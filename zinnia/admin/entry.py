@@ -11,6 +11,9 @@ from django.conf.urls.defaults import patterns
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse, NoReverseMatch
 
+from django.db import models
+from markitup.widgets import AdminMarkItUpWidget
+
 from tagging.models import Tag
 
 from zinnia import settings
@@ -47,6 +50,7 @@ class EntryAdmin(admin.ModelAdmin):
                     'get_comments_are_open', 'pingback_enabled',
                     'get_is_actual', 'get_is_visible', 'get_link',
                     'get_short_url', 'creation_date')
+    formfield_overrides = { models.TextField: {'widget': AdminMarkItUpWidget}, }
     radio_fields = {'template': admin.VERTICAL}
     filter_horizontal = ('categories', 'authors', 'related')
     prepopulated_fields = {'slug': ('title', )}
