@@ -12,8 +12,8 @@
     {% for object in object_list %}
     <li class="vcard">
       <a href="{% url zinnia_author_detail object.username %}"
-         title="{{ object.username }}" class="fn nickname url">
-        {{ object.username }}
+         title="{{ object.username|title }}" class="fn nickname url">
+        {{ object.username|title }}
       </a>
       {% blocktrans count object.entries_published.count as entry_count %}{{ entry_count }} entry{% plural %}{{ entry_count }} entries{% endblocktrans %}
     </li>
